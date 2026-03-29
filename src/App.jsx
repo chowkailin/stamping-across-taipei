@@ -1,119 +1,90 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+function importAll(r) {
+    return Object.values(r).map(o => o.default );
+}
+const images = importAll(import.meta.glob('./assets/stamps/*', { eager: true }));
 
+/*
+[
+'stamps/1.png',
+'stamps/2.png'
+'stamps/3.png'
+'stamps/4.png'
+]
+
+[
+<img src='stamps/1.png' width="200" height="200" />
+<img src='stamps/2.png' width="200" height="200" />
+<img src='stamps/3.png' width="200" height="200" />
+<img src='stamps/4.png' width="200" height="200" />
+]
+*/
+
+export function App() {
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Hello</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+      <section>
+        <Header />
+        <Intro />
+        <Stat1 />
       </section>
 
-      <div className="ticks"></div>
+    <div>
+      {images.map(path => <img src={path} width="200" height="200" />)}
+    </div>
+    </>
+  )
+}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+function Header() {
+  return (
+    <>
+      <section id="title" class="header-container">
+        <div class="title-container">
+          <h1>stamping across taipei <br /> in 5 days</h1>
+          <p1>
+            { '> skip to stamp catalogue' }
+          </p1>
+          {/* <img src={1.png} alt="Company Logo" /> */}
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+
+        <div class="sticker-container">
+          <p1> flying stickers yay </p1>
+        </div>
+
+      </section>
+    </>
+  )
+}
+
+function Intro() {
+  return (
+    <>
+      <section id="Intro">
+        <div class="Stat-container">
+          <h2>some introduction about this <span className="word1">styled</span>thing</h2>
+          <p2>
+            { 'maybe include the dates of this project' }
+          </p2>
         </div>
       </section>
+    </>
+  )
+}
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+function Stat1() {
+  return (
+    <>
+      <section id="Stat1">
+        <div class="Stat-container">
+          <h2>another stat here</h2>
+          <p2>
+            { 'maybe include the dates of this project' }
+          </p2>
+        </div>
+      </section>
     </>
   )
 }
