@@ -9,13 +9,13 @@ import stamp51 from './assets/stamps/51.png'
 import './App.css'
 
 const stickerData = [
-  { src: stamp06, className: 'sticker sticker-1', rotate: -12 },
+  { src: stamp06, className: 'stickerv2 sticker-1', rotate: -12 },
   { src: stamp19, className: 'sticker sticker-2', rotate: 15 },
-  { src: stamp17, className: 'sticker sticker-3', rotate: -8, centerX: true },
-  { src: stamp46, className: 'sticker sticker-4', rotate: 10 },
-  { src: stamp73, className: 'sticker sticker-5', rotate: -18 },
+  { src: stamp17, className: 'stickerv2 sticker-3', rotate: -8, centerX: true },
+  { src: stamp73, className: 'sticker sticker-4', rotate: 10 },
+  { src: stamp46, className: 'sticker sticker-5', rotate: -18 },
   { src: stamp78, className: 'sticker sticker-6', rotate: 14 },
-  { src: stamp51, className: 'sticker sticker-7', rotate: -5 },
+  { src: stamp51, className: 'stickerv2 sticker-7', rotate: -5 },
 ]
 
 export function App() {
