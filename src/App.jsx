@@ -1,63 +1,89 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import stamp06 from './assets/stamps/06.png'
+import stamp19 from './assets/stamps/19.png'
+import stamp17 from './assets/stamps/17.png'
+import stamp46 from './assets/stamps/46.png'
+import stamp73 from './assets/stamps/73.png'
+import stamp78 from './assets/stamps/78.png'
+import stamp51 from './assets/stamps/51.png'
 import './App.css'
 
-function importAll(r) {
-    return Object.values(r).map(o => o.default );
-}
-const images = importAll(import.meta.glob('./assets/stamps/*', { eager: true }));
-
-/*
-[
-'stamps/1.png',
-'stamps/2.png'
-'stamps/3.png'
-'stamps/4.png'
+const stickerData = [
+  { src: stamp06, className: 'stickerv2 sticker-1', rotate: -12 },
+  { src: stamp19, className: 'sticker sticker-2', rotate: 15 },
+  { src: stamp17, className: 'stickerv2 sticker-3', rotate: -8, centerX: true },
+  { src: stamp73, className: 'sticker sticker-4', rotate: 10 },
+  { src: stamp46, className: 'sticker sticker-5', rotate: -18 },
+  { src: stamp78, className: 'sticker sticker-6', rotate: 14 },
+  { src: stamp51, className: 'stickerv2 sticker-7', rotate: -5 },
 ]
-
-[
-<img src='stamps/1.png' width="200" height="200" />
-<img src='stamps/2.png' width="200" height="200" />
-<img src='stamps/3.png' width="200" height="200" />
-<img src='stamps/4.png' width="200" height="200" />
-]
-*/
 
 export function App() {
   return (
     <>
-      <section>
-        <Header />
-        <Intro />
-        <Stat1 />
-      </section>
-
-    <div>
-      {images.map(path => <img src={path} width="200" height="200" />)}
-    </div>
+      <Header />
+      <Intro />
+      <Stat1 />
     </>
   )
 }
 
 function Header() {
+  const sectionRef = useRef(null)
+  const [scrollProgress, setScrollProgress] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return
+      const rect = sectionRef.current.getBoundingClientRect()
+      const progress = Math.max(0, Math.min(1, -rect.top / rect.height))
+      setScrollProgress(progress)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <>
-      <section id="title" class="header-container">
-        <div class="title-container">
-          <h1>stamping across taipei <br /> in 5 days</h1>
-          <p1>
-            { '> skip to stamp catalogue' }
-          </p1>
-          {/* <img src={1.png} alt="Company Logo" /> */}
-        </div>
+    <section id="title" className="header-container" ref={sectionRef}>
+      <div className="title-container">
+        <h1>stamping across taipei <br /> in 5 days</h1>
+        <p1>{'> skip to stamp catalogue'}</p1>
+      </div>
 
-        <div class="sticker-container">
-          <p1> flying stickers yay </p1>
-        </div>
-
-      </section>
-    </>
+      <div className="sticker-container">
+        {stickerData.map((sticker, i) => {
+          const fly = flyDirections[i]
+          const t = Math.min(scrollProgress * 2, 1)
+          const cx = sticker.centerX ? 'translateX(-50%) ' : ''
+          const style = {
+            transform: `${cx}translate(${fly.x * t * 60}vw, ${fly.y * t * 60}vh) rotate(${sticker.rotate}deg)`,
+            opacity: Math.max(0, 1 - t),
+          }
+          return (
+            <img
+              key={i}
+              src={sticker.src}
+              className={sticker.className}
+              style={style}
+              alt=""
+            />
+          )
+        })}
+      </div>
+    </section>
   )
 }
+
+// Each sticker flies to its nearest edge (top/left/right, never bottom)
+const flyDirections = [
+  { x: -0.5, y: -1.0 },  // sticker-1: top-left → fly up-left
+  { x: 0.5,  y: -1.0 },  // sticker-2: top-right → fly up-right
+  { x: 0,    y: -1.0 },  // sticker-3: top-center → fly up
+  { x: -1.0, y: 0 },     // sticker-4: left side → fly left
+  { x: 1.0,  y: 0 },     // sticker-5: right side → fly right
+  { x: -1.0, y: -0.3 },  // sticker-6: bottom-left → fly left (+ slight up)
+  { x: 1.0,  y: -0.3 },  // sticker-7: bottom-right → fly right (+ slight up)
+]
 
 function Intro() {
   return (

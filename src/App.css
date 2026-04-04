@@ -11,21 +11,58 @@
 .header-container {
   display: flex;
   height: 100vh;
+  width: 100vw;
   position: relative;
-  justify-content: center; /* Horizontal */
-  align-items: center;     /* Vertical */
-  background: pink;
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  overflow: visible;
 }
 
 .sticker-container {
-  display: flex;
-  justify-content: flex-start; /* Horizontal */
-  align-items: center;     /* Vertical */
-  height: 100vh;           /*Full viewport height */
-  width: 100vw;
   position: absolute;
+  inset: 0;
   z-index: 1;
+  pointer-events: none;
 }
+
+.sticker {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  transition: transform 0.05s linear, opacity 0.05s linear;
+  will-change: transform, opacity;
+}
+
+.stickerv2 {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  transition: transform 0.05s linear, opacity 0.05s linear;
+  will-change: transform, opacity;
+}
+
+@media (min-width: 768px) {
+  .sticker { width: 160px; height: 160px; }
+  .stickerv2 { width: 180px; height: 180px; }
+}
+
+@media (min-width: 1280px) {
+  .sticker { width: 180px; height: 180px; }
+  .stickerv2 { width: 220px; height: 220px; }
+}
+
+.sticker-1 { top: 6%; left: 5%; }
+.sticker-2 { top: 5%; right: 6%; }
+.sticker-3 { top: 12%; left: 50%; }
+.sticker-4 { bottom: 22%; left: 5%; }
+.sticker-5 { bottom: 22%; right: 5%; }
+.sticker-6 { bottom: 5%; left: 20%; }
+.sticker-7 { bottom: 3%; right: 22%; }
 
 .Stat-container {
     display: flex;
@@ -90,3 +127,4 @@ p2 {
   /* -webkit-text-stroke: 5px #000; */
   
 }
+
