@@ -56,13 +56,40 @@
   .stickerv2 { width: 220px; height: 220px; }
 }
 
-.sticker-1 { top: 6%; left: 5%; }
-.sticker-2 { top: 5%; right: 6%; }
-.sticker-3 { top: 12%; left: 50%; }
-.sticker-4 { bottom: 22%; left: 5%; }
-.sticker-5 { bottom: 22%; right: 5%; }
-.sticker-6 { bottom: 5%; left: 20%; }
-.sticker-7 { bottom: 3%; right: 22%; }
+.sticker-06 { top: 6%; left: 5%; }
+.sticker-19 { top: 5%; right: 6%; }
+.sticker-17 { top: 12%; left: 50%; }
+.sticker-73 { bottom: 22%; left: 5%; }
+.sticker-46 { bottom: 22%; right: 5%; }
+.sticker-78 { bottom: 5%; left: 20%; }
+.sticker-51 { bottom: 3%; right: 22%; }
+
+.aeroplane-layer {
+  position: absolute;
+  top: 60vh;
+  left: 0;
+  width: 100%;
+  height: 140vh;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.aeroplane-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.aeroplane-icon {
+  position: absolute;
+  font-size: 28px;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .aeroplane-icon { font-size: 36px; }
+}
 
 .Stat-container {
     display: flex;
@@ -88,6 +115,19 @@ h2 {
 }
 
 h3 {
+  font-size: 30px;
+  line-height: 1.2;
+  border-radius: 5px;
+  margin-bottom: 10px;
+
+}
+
+word2:hover {
+  background-color: purple;
+}
+
+
+h4 {
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -126,5 +166,24 @@ p2 {
     2px 3px #000, -3px -2px #000, 2px -3px #000, -3px 2px #000; */
   /* -webkit-text-stroke: 5px #000; */
   
+}
+
+.word2 {
+  font-style: italic;
+  /* color: grey; */
+  font-weight: 400;
+  font-size: 25px;
+  padding: 0px;
+  margin: 0px;
+  background-color: black;
+
+  &:hover {
+    /* text-decoration: underline; */
+    background: transparent;
+  }
+}
+
+word2:hover {
+  background-color:aqua;
 }
 

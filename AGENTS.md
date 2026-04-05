@@ -31,7 +31,7 @@ cmux version
 npm run dev
 
 # In a script or from another pane, split a browser preview to the right
-cmux browser open-split http://localhost:5173
+cmux browser open-split http://localhost:3000
 ```
 
 Or do it all in one shot from the CLI:
@@ -40,7 +40,7 @@ Or do it all in one shot from the CLI:
 # Start dev server in a new split, then open a browser alongside it
 cmux new-split right
 cmux send --surface surface:1 "npm run dev"
-cmux new-pane --type browser --direction right --url http://localhost:5173
+cmux new-pane --type browser --direction right --url http://localhost:3000
 ```
 
 ### Reload the browser after changes
@@ -197,7 +197,7 @@ Place this `cmux.json` in the project root to register workspace commands in the
                       {
                         "type": "browser",
                         "name": "Preview",
-                        "url": "http://localhost:5173"
+                        "url": "http://localhost:3000"
                       }
                     ]
                   }
