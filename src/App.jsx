@@ -90,11 +90,12 @@ import stamp88 from './assets/stamps/88.png'
 import stamp89 from './assets/stamps/89.png'
 import stamp90 from './assets/stamps/90.png'
 import stamp91 from './assets/stamps/91.png'
+import taipeiword from './assets/taipei-word.png'
 import './App.css'
 
 const stickerData = [
   { src: stamp06, className: 'stickerv2 sticker-06', rotate: -12 },
-  { src: stamp19, className: 'sticker sticker-19', rotate: 15 },
+  { src: stamp19, className: 'stickerv2 sticker-19', rotate: 15 },
   { src: stamp17, className: 'stickerv2 sticker-17', rotate: -8, centerX: true },
   { src: stamp73, className: 'sticker sticker-73', rotate: 10 },
   { src: stamp46, className: 'sticker sticker-46', rotate: -18 },
@@ -104,32 +105,21 @@ const stickerData = [
 
 export function App() {
   const appRef = useRef(null)
-  const [planeProgress, setPlaneProgress] = useState(0)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-      const vh = window.innerHeight
-      const start = vh * 0.6
-      const end = vh * 1.8
-      const p = Math.max(0, Math.min(1, (scrollY - start) / (end - start)))
-      setPlaneProgress(p)
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const [headerScrollProgress, setHeaderScrollProgress] = useState(0)
+  const [introScrollProgress, setIntroScrollProgress] = useState(0)
 
   return (
     <div ref={appRef} style={{ position: 'relative' }}>
-      <Header />
-      <Aeroplane progress={planeProgress} />
-      <Intro />
-      <Stat1 />
+      <Header onScroll={setHeaderScrollProgress} />
+      <Aeroplane headerProgress={headerScrollProgress} />
+      <Intro headerProgress={headerScrollProgress} />
+      <Intro2 onScroll={setIntroScrollProgress} />
+      <Stat1 introProgress={introScrollProgress} />
     </div>
   )
 }
 
-function Header() {
+function Header({ onScroll }) {
   const sectionRef = useRef(null)
   const [scrollProgress, setScrollProgress] = useState(0)
 
@@ -139,10 +129,11 @@ function Header() {
       const rect = sectionRef.current.getBoundingClientRect()
       const progress = Math.max(0, Math.min(1, -rect.top / rect.height))
       setScrollProgress(progress)
+      onScroll?.(progress)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [onScroll])
 
   return (
     <section id="title" className="header-container" ref={sectionRef}>
@@ -186,16 +177,25 @@ const flyDirections = [
   { x: 1.0,  y: -0.3 },  // sticker-51: bottom-right → fly right (+ slight up)
 ]
 
-function Aeroplane({ progress }) {
-  // Quadratic bezier: bottom-center → far right (avoiding text) → top-right exit
+function Aeroplane({ headerProgress }) {
+  // Stamps at 0.3 opacity = headerProgress 0.35
+  // Stamps at 0.1 opacity = headerProgress 0.45
+  // Animation starts at 0.35, sharpens right movement at 0.45
+  const stickerExitProgress = 0.35
+  const flyProgress = Math.max(0, (headerProgress - stickerExitProgress) / (1 - stickerExitProgress))
+
+  // Cubic bezier: down → sharp right → down
   const getPoint = (t) => {
-    // P0=(85,95) → P1=(105,40) → P2=(95,-35)
-    const p0 = { x: 85, y: 95 }
-    const p1 = { x: 105, y: 40 }
-    const p2 = { x: 95, y: -35 }
+    // P0=(50,37) → P1=(52,70) → P2=(95,70) → P3=(120,110)
+    // Slight right while moving down, then sharp right movement, then down and right to exit bottom right
+    const p0 = { x: 50, y: 37 }
+    const p1 = { x: 60, y: 95 }
+    const p2 = { x: 80, y: 20 }
+    const p3 = { x: 125, y: 120 }
+    const p4 = { x: 200, y: 200 }
     const mt = 1 - t
-    const x = mt * mt * p0.x + 2 * mt * t * p1.x + t * t * p2.x
-    const y = mt * mt * p0.y + 2 * mt * t * p1.y + t * t * p2.y
+    const x = mt * mt * mt * p0.x + 3 * mt * mt * t * p1.x + 3 * mt * t * t * p2.x + t * t * t * p3.x 
+    const y = mt * mt * mt * p0.y + 3 * mt * mt * t * p1.y + 3 * mt * t * t * p2.y + t * t * t * p3.y
     return { x, y }
   }
 
@@ -203,12 +203,12 @@ function Aeroplane({ progress }) {
     const dt = 0.01
     const a = getPoint(Math.max(0, t - dt))
     const b = getPoint(Math.min(1, t + dt))
-    return Math.atan2(a.y - b.y, b.x - a.x) * (180 / Math.PI)
+    return Math.atan2(b.y - a.y, b.x - a.x) * (180 / Math.PI)
   }
 
   // Build the dotted trail path (only up to current progress)
   const trailPoints = []
-  const steps = Math.floor(progress * 80)
+  const steps = Math.floor(flyProgress * 80)
   for (let i = 0; i <= steps; i++) {
     const t = i / 80
     const pt = getPoint(t)
@@ -219,10 +219,8 @@ function Aeroplane({ progress }) {
       trailPoints.slice(1).map(p => `L ${p.x} ${p.y}`).join(' ')
     : ''
 
-  const plane = getPoint(progress)
-  const angle = getAngle(progress)
-
-  if (progress <= 0) return null
+  const plane = getPoint(flyProgress)
+  const angle = flyProgress > 0 ? getAngle(flyProgress) : 0
 
   return (
     <div className="aeroplane-layer">
@@ -232,8 +230,8 @@ function Aeroplane({ progress }) {
             d={trailD}
             fill="none"
             stroke="#999"
-            strokeWidth="0.3"
-            strokeDasharray="1 1"
+            strokeWidth="0.8"
+            strokeDasharray="10 10"
             vectorEffect="non-scaling-stroke"
           />
         )}
@@ -243,8 +241,8 @@ function Aeroplane({ progress }) {
         style={{
           left: `${plane.x}%`,
           top: `${plane.y}%`,
-          transform: `translate(-50%, -50%) rotate(-${angle}deg)`,
-          opacity: progress > 0.9 ? Math.max(0, (1 - progress) * 10) : 1,
+          transform: `translate(-50%, -50%) rotate(${angle}deg)`,
+          opacity: flyProgress > 0.9 ? Math.max(0, (1 - flyProgress) * 10) : 1,
         }}
       >
         ✈
@@ -253,7 +251,7 @@ function Aeroplane({ progress }) {
   )
 }
 
-function Intro() {
+function Intro({headerProgress}) {
   return (
     <>
       <section id="Intro">
@@ -262,6 +260,84 @@ function Intro() {
           <p2>
             { 'basically 5 days of me dragging my family around for some inked images' }<br></br> {'17 - 21 february 2026' }
           </p2>
+          <img src={taipeiword} 
+          style={{ width: '250px', position: 'relative', left: '-400px', top: '-370px', transform: 'rotate(-20deg)', opacity: 0, opacity: headerProgress +0.2,
+        transition: 'opacity 0.2s ease-in',}}/>
+          
+        </div>
+      </section>
+    </>
+  )
+}
+
+function Intro2() {
+  const sectionRef1 = useRef(null)
+  const [isInView, setIsInView] = useState(false)
+  const [introScrollProgress, setIntroScrollProgress] = useState(0)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        setIsInView(entry.isIntersecting)
+      });
+    }, {
+      // rootMargin: '500px 0px',
+      // thresholds: [0.1, 0.2]
+    })
+
+    if (sectionRef1.current) {
+      observer.observe(sectionRef1.current);
+    }
+
+    return () => {
+      if (sectionRef1.current) {
+        observer.unobserve(sectionRef1.current)
+      }
+    };
+  }, [])
+
+  useEffect(() => {
+    if (isInView) {
+      console.log("attaching...")
+
+      const handleScroll = () => {
+        if (!sectionRef1.current ) return
+        const rect = sectionRef1.current.getBoundingClientRect()
+        // const progress = Math.max(0, Math.min(1, -rect.top / rect.height))
+        // setIntroScrollProgress(progress)
+
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const visibleHeight = Math.max(0, Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0));
+        setIntroScrollProgress(visibleHeight / rect.height)
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true })
+
+      return () => {
+        console.log("detaching...")
+
+        window.removeEventListener('scroll', handleScroll)
+      } 
+    }
+  }, [isInView])
+
+  console.log("introScrollProgress: ", introScrollProgress);
+
+  return (
+    <>
+      <section id="Intro">
+        <div class="Stat-container" ref={sectionRef1}>
+          <h3>and some very <span style={{ color: 'blue', fontWeight: 'bold' }}>sweet</span>, <br></br>
+          very <span style={{ color: 'blue', fontWeight: 'bold' }}>calorie-heavy</span>, <br></br>
+          <span style={{ color: 'brown', fontWeight: 'bold' }}>beige</span> drink <br></br>
+          with black round pearls<br></br> 
+          or sometimes <span style={{ color: 'yellow', fontWeight: 'bold' }}>gold</span></h3>
+          <p2>
+            { 'how can we not in the land of bubble tea' }
+          </p2>
+          <img src={stamp29}
+          style={{ width: '250px', position: 'relative', left: '400px', top: '-230px', transform: 'rotate(20deg)', opacity: introScrollProgress,
+        transition: 'opacity 0.2s ease-in'}}/>
         </div>
       </section>
     </>

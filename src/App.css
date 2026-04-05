@@ -1,3 +1,19 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fafaf8;
+  background-image: url('./assets/textured-paper.png');
+  background-size: 1500px 800px;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
 .title-container {
     display: flex;
     height: 100vh;           /*Full viewport height */
@@ -58,7 +74,7 @@
 
 .sticker-06 { top: 6%; left: 5%; }
 .sticker-19 { top: 5%; right: 6%; }
-.sticker-17 { top: 12%; left: 50%; }
+.sticker-17 { top: 10%; left: 50%; }
 .sticker-73 { bottom: 22%; left: 5%; }
 .sticker-46 { bottom: 22%; right: 5%; }
 .sticker-78 { bottom: 5%; left: 20%; }
@@ -66,10 +82,10 @@
 
 .aeroplane-layer {
   position: absolute;
-  top: 60vh;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 140vh;
+  height: 200vh;
   pointer-events: none;
   z-index: 10;
 }
@@ -170,16 +186,17 @@ p2 {
 
 .word2 {
   font-style: italic;
-  /* color: grey; */
+  color: lightblue;
   font-weight: 400;
   font-size: 25px;
   padding: 0px;
   margin: 0px;
-  background-color: black;
+  background-color: lightblue;
 
   &:hover {
     /* text-decoration: underline; */
     background: transparent;
+    color: grey;
   }
 }
 
