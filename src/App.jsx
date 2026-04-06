@@ -93,6 +93,113 @@ import stamp91 from './assets/stamps/91.png'
 import taipeiword from './assets/taipei-word.png'
 import './App.css'
 
+const stampData = [
+  { location: 'Airport T1', date: '17 Feb 2026', time: '7:51 AM' },
+  { location: 'Taipei Main Station', date: '17 Feb 2026', time: '8:38 AM' },
+  { location: 'Taipei Main Station', date: '17 Feb 2026', time: '8:56 AM' },
+  { location: 'Gongguan Station', date: '17 Feb 2026', time: '9:39 AM' },
+  { location: 'Ximen Station', date: '17 Feb 2026', time: '12:38 PM' },
+  { location: 'Longshan Temple Station', date: '17 Feb 2026', time: '5:57 PM' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
+  { location: 'Flower Clock', date: '18 Feb 2026', time: '1:07 PM' },
+  { location: 'Jiantan Station', date: '18 Feb 2026', time: '3:47 PM' },
+  { location: 'Dongmen Station', date: '19 Feb 2026', time: '10:37 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
+  { location: 'Songjiang Nanjing Station', date: '19 Feb 2026', time: '3:09 PM' },
+  { location: 'Zhongshan Station', date: '19 Feb 2026', time: '3:27 PM' },
+  { location: 'Keelung Station', date: '20 Feb 2026', time: '10:52 AM' },
+  { location: 'Keelung Station', date: '20 Feb 2026', time: '10:52 AM' },
+  { location: 'Keelung Starbucks', date: '20 Feb 2026', time: '11:27 AM' },
+  { location: 'Keelung Starbucks', date: '20 Feb 2026', time: '11:27 AM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '3:00 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '3:00 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '3:00 PM' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '3:00 PM' },
+  { location: 'The Red House', date: '21 Feb 2026', time: '11:56 AM' },
+  { location: 'The Red House', date: '21 Feb 2026', time: '11:56 AM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:54 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:57 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:57 PM' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:57 PM' },
+  { location: 'Beimen Station', date: '21 Feb 2026', time: '3:21 PM' },
+  { location: 'Dadaocheng Tourist Centre', date: '21 Feb 2026', time: '3:45 PM' },
+  { location: 'Dadaocheng Tourist Centre', date: '21 Feb 2026', time: '3:45 PM' },
+  { location: 'Dadaocheng Tourist Centre', date: '21 Feb 2026', time: '3:45 PM' },
+]
+
+const allStamps = [
+  stamp01, stamp02, stamp03, stamp04, stamp05, stamp06, stamp07, stamp08, stamp09, stamp10,
+  stamp11, stamp12, stamp13, stamp14, stamp15, stamp16, stamp17, stamp18, stamp19, stamp20,
+  stamp21, stamp22, stamp23, stamp24, stamp25, stamp26, stamp27, stamp28, stamp29, stamp30,
+  stamp31, stamp32, stamp33, stamp34, stamp35, stamp36, stamp37, stamp38, stamp39, stamp40,
+  stamp41, stamp42, stamp43, stamp44, stamp45, stamp46, stamp47, stamp48, stamp49, stamp50,
+  stamp51, stamp52, stamp53, stamp54, stamp55, stamp56, stamp57, stamp58, stamp59, stamp60,
+  stamp61, stamp62, stamp63, stamp64, stamp65, stamp66, stamp67, stamp68, stamp69, stamp70,
+  stamp71, stamp72, stamp73, stamp74, stamp75, stamp76, stamp77, stamp78, stamp79, stamp80,
+  stamp81, stamp82, stamp83, stamp84, stamp85, stamp86, stamp87, stamp88, stamp89, stamp90,
+  stamp91,
+]
+
 const stickerData = [
   { src: stamp06, className: 'stickerv2 sticker-06', rotate: -12 },
   { src: stamp19, className: 'stickerv2 sticker-19', rotate: 15 },
@@ -115,6 +222,7 @@ export function App() {
       <Intro headerProgress={headerScrollProgress} />
       <Intro2 onScroll={setIntroScrollProgress} />
       <Stat1 introProgress={introScrollProgress} />
+      <StampCatalogue />
     </div>
   )
 }
@@ -139,7 +247,7 @@ function Header({ onScroll }) {
     <section id="title" className="header-container" ref={sectionRef}>
       <div className="title-container">
         <h1>stamping across taipei <br /> in 5 days</h1>
-        <p1>{'> skip to stamp catalogue'}</p1>
+        <p1 onClick={() => document.getElementById('stamp-catalogue').scrollIntoView({ behavior: 'smooth' })} style={{ cursor: 'pointer' }}>{'> skip to stamp catalogue'}</p1>
       </div>
 
       <div className="sticker-container">
@@ -178,21 +286,35 @@ const flyDirections = [
 ]
 
 function Aeroplane({ headerProgress }) {
+  const [startY, setStartY] = useState(37)
+
+  useEffect(() => {
+    const update = () => {
+      const textEl = document.querySelector('.title-container p1')
+      if (!textEl) return
+      const rect = textEl.getBoundingClientRect()
+      const layerHeight = window.innerHeight * 2 // 200vh
+      const textBottomPx = rect.bottom + window.scrollY + 30 // 30px gap below text
+      setStartY((textBottomPx / layerHeight) * 100)
+    }
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
   // Stamps at 0.3 opacity = headerProgress 0.35
   // Stamps at 0.1 opacity = headerProgress 0.45
   // Animation starts at 0.35, sharpens right movement at 0.45
-  const stickerExitProgress = 0.35
+  const stickerExitProgress = 0.25
   const flyProgress = Math.max(0, (headerProgress - stickerExitProgress) / (1 - stickerExitProgress))
 
   // Cubic bezier: down → sharp right → down
   const getPoint = (t) => {
-    // P0=(50,37) → P1=(52,70) → P2=(95,70) → P3=(120,110)
-    // Slight right while moving down, then sharp right movement, then down and right to exit bottom right
-    const p0 = { x: 50, y: 37 }
-    const p1 = { x: 60, y: 95 }
-    const p2 = { x: 80, y: 20 }
+    const dy = startY - 37
+    const p0 = { x: 50, y: startY }
+    const p1 = { x: 60, y: 95 + dy }
+    const p2 = { x: 80, y: 20 + dy }
     const p3 = { x: 125, y: 120 }
-    const p4 = { x: 200, y: 200 }
     const mt = 1 - t
     const x = mt * mt * mt * p0.x + 3 * mt * mt * t * p1.x + 3 * mt * t * t * p2.x + t * t * t * p3.x 
     const y = mt * mt * mt * p0.y + 3 * mt * mt * t * p1.y + 3 * mt * t * t * p2.y + t * t * t * p3.y
@@ -263,7 +385,6 @@ function Intro({headerProgress}) {
           <img src={taipeiword} 
           style={{ width: '250px', position: 'relative', left: '-400px', top: '-370px', transform: 'rotate(-20deg)', opacity: 0, opacity: headerProgress +0.2,
         transition: 'opacity 0.2s ease-in',}}/>
-          
         </div>
       </section>
     </>
@@ -356,6 +477,33 @@ function Stat1() {
         </div>
       </section>
     </>
+  )
+}
+
+function StampCatalogue() {
+  return (
+    <section id="stamp-catalogue" className="catalogue-section">
+      <h2 className="catalogue-title">stamp catalogue</h2>
+      <div className="catalogue-grid">
+        {allStamps.map((src, i) => {
+          const num = String(i + 1).padStart(2, '0')
+          const info = stampData[i]
+          return (
+            <div key={i} className="catalogue-item">
+              <img src={src} alt={`Stamp ${num}`} />
+              <span className="catalogue-number">{num}</span>
+              {info && (
+                <div className="catalogue-tooltip">
+                  <span>location: {info.location}</span>
+                  <span>date: {info.date}</span>
+                  <span>time: {info.time}</span>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+    </section>
   )
 }
 

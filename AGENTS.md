@@ -55,39 +55,41 @@ cmux browser reload
 
 The cmux in-app browser is scriptable. Use it to visually verify UI changes without leaving the terminal.
 
+> **Important:** Browser commands require `--surface <id>` **before** the subcommand to target a specific browser pane.
+> Find surface IDs with `cmux list-panels`. Example: `cmux browser --surface surface:2 screenshot`
+
 ### Take a snapshot of the accessibility tree (useful for verifying rendered content)
 
 ```bash
-cmux browser snapshot
-cmux browser snapshot --interactive          # only interactive elements
-cmux browser snapshot --selector ".app"      # scope to a CSS selector
-cmux browser snapshot --compact              # compact output
+cmux browser --surface surface:2 snapshot
+cmux browser --surface surface:2 snapshot --interactive    # only interactive elements
+cmux browser --surface surface:2 snapshot --selector ".app" # scope to a CSS selector
+cmux browser --surface surface:2 snapshot --compact         # compact output
 ```
 
 ### Take a screenshot
 
 ```bash
-cmux browser screenshot --out screenshot.png
-cmux browser screenshot --json               # base64 output for programmatic use
+cmux browser --surface surface:2 screenshot          # saves to temp dir, returns file path
+cmux browser --surface surface:2 screenshot --json   # base64 output for programmatic use
 ```
 
 ### Check element visibility and state
 
 ```bash
-cmux browser is visible ".header"
-cmux browser is visible ".stamp-card"
-cmux browser get text ".title"
-cmux browser get count ".stamp-item"
-cmux browser get styles ".button" --property background-color
+cmux browser --surface surface:2 is visible ".header"
+cmux browser --surface surface:2 get text ".title"
+cmux browser --surface surface:2 get count ".stamp-item"
+cmux browser --surface surface:2 get styles ".button" --property background-color
 ```
 
 ### Wait for UI to settle after navigation or data loading
 
 ```bash
-cmux browser wait --selector ".content-loaded"
-cmux browser wait --text "Welcome"
-cmux browser wait --load-state interactive
-cmux browser wait --function "() => document.readyState === 'complete'"
+cmux browser --surface surface:2 wait --selector ".content-loaded"
+cmux browser --surface surface:2 wait --text "Welcome"
+cmux browser --surface surface:2 wait --load-state interactive
+cmux browser --surface surface:2 wait --function "() => document.readyState === 'complete'"
 ```
 
 ---
@@ -361,15 +363,50 @@ git commit -m "docs(readme): update setup instructions"
 
 When an AI coding agent is working in this project inside cmux:
 
+0. **Always open a cmux browser side-pane at the start of every prompt.** Before doing any work, run:
+   ```bash
+   cmux browser open-split http://localhost:3000
+   ```
+   This ensures you always have a live preview available for visual verification. If the dev server is not running, start it first in a split pane.
+
 1. **Always start the dev server** before making UI changes so you can verify visually.
-2. **Use `cmux browser snapshot`** after changes to verify rendered output in the accessibility tree.
-3. **Use `cmux browser screenshot`** to capture visual state when debugging layout or styling issues.
-4. **Use `cmux browser eval`** to inspect runtime state (e.g., React component output, DOM element counts).
-5. **Use `cmux browser wait`** before assertions — don't assume the page has rendered yet.
+2. **Use `cmux browser --surface surface:2 snapshot`** after changes to verify rendered output in the accessibility tree.
+3. **Use `cmux browser --surface surface:2 screenshot`** to capture visual state when debugging layout or styling issues.
+4. **Use `cmux browser --surface surface:2 eval`** to inspect runtime state (e.g., React component output, DOM element counts).
+5. **Use `cmux browser --surface surface:2 wait`** before assertions — don't assume the page has rendered yet.
 6. **Use `cmux notify`** to alert the user when builds, tests, or long tasks complete.
 7. **Use `cmux read-screen`** to read terminal output from other panes (e.g., check Vite dev server for errors).
 8. **Use `cmux send`** to run commands in other panes without switching focus.
 9. **Prefer the cmux.json workspace commands** to set up reproducible dev environments.
+
+### Verified cmux CLI Findings
+
+The following quirks were discovered during development and differ from the official docs:
+
+- **`--surface` must come before the subcommand** for all `cmux browser` commands. `cmux browser screenshot --surface surface:2` does NOT work; use `cmux browser --surface surface:2 screenshot`.
+- **`cmux browser` without `--surface` fails** with `"browser requires a subcommand"`. Always specify the surface ID. Find it via `cmux list-panels`.
+- **`cmux browser --surface surface:2 screenshot`** saves to a temp directory and returns the file path (e.g., `OK file:///var/folders/.../surface-xxx.png`). There is no `--out` flag; pipe or copy the output path.
+- **`cmux send` appends a newline by default.** No need to add `\n` unless sending multiple lines.
+- **`cmux send-key` only works on terminal surfaces.** Sending `ctrl+c` to a browser surface returns `"Surface is not a terminal"`.
+- **`cmux new-split` returns a surface ID** (e.g., `surface:4`) — save this to target the new pane later.
+- **Port conflicts:** If the dev server port is in use, Vite will auto-increment. Kill the old process first with `lsof -ti:3000 | xargs kill -9` before restarting.
+- **Scrolling the browser:** Use `cmux browser --surface surface:2 eval "window.scrollTo({ top: 500, behavior: 'instant' })"` — the `scroll` subcommand is for element-level scrolling, not page scrolling.
+
+---
+
+## Development Progress
+
+### Completed
+
+- **Title section with 7 flying stickers**: Stamps (06, 19, 17, 46, 73, 78, 51) arranged around the title "stamping across taipei in 5 days". Each sticker flies to its nearest edge (top/left/right, never bottom) on scroll, maintaining its original rotation. Responsive sizing: 100px mobile → 140/160px tablet → 180/220px laptop.
+- **Aeroplane animation**: A ✈ icon starts below "skip to stamp catalogue" text and flies along a quadratic bezier curve toward the bottom-right edge as the user scrolls to the Intro section. Leaves a dotted trail behind it. Trail path avoids all centered text.
+- **Intro section**: Stamp collecting narrative with styled text and date range.
+- **Dev server port**: Vite configured to always use `localhost:3000`.
+
+### In Progress
+
+- Stat1 section (placeholder content)
+- Stamp catalogue section (referenced in "skip to stamp catalogue" link)
 
 ---
 

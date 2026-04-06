@@ -95,6 +95,7 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
 
 .aeroplane-icon {
@@ -202,5 +203,97 @@ p2 {
 
 word2:hover {
   background-color:aqua;
+}
+
+/* Stamp Catalogue */
+
+.catalogue-section {
+  padding: 60px 20px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.catalogue-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.catalogue-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.catalogue-item {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 1px solid #ccc;
+  position: relative;
+}
+
+.catalogue-item img {
+  width: 100%;
+  height: auto;
+  flex: 1;
+  object-fit: contain;
+  min-height: 0;
+}
+
+.catalogue-number {
+  font-size: 13px;
+  color: #666;
+  margin-top: 6px;
+  text-align: center;
+}
+
+.catalogue-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: nowrap;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.catalogue-tooltip span {
+  display: block;
+}
+
+.catalogue-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #333;
+}
+
+.catalogue-item:hover .catalogue-tooltip {
+  display: block;
+}
+
+@media (min-width: 480px) {
+  .catalogue-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 768px) {
+  .catalogue-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+}
+
+@media (min-width: 1024px) {
+  .catalogue-grid { grid-template-columns: repeat(5, 1fr); gap: 20px; }
 }
 
