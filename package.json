@@ -1,6 +1,7 @@
 {
   "name": "stamping-across-taipei",
   "private": true,
+  "homepage": "https://chowkailin.github.io/stamping-across-taipei/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
