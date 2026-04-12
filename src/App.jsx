@@ -91,100 +91,117 @@ import stamp89 from './assets/stamps/89.png'
 import stamp90 from './assets/stamps/90.png'
 import stamp91 from './assets/stamps/91.png'
 import taipeiword from './assets/taipei-word.png'
+import bbt1 from './assets/bbthunt/bbt1.jpg'
+import bbt2 from './assets/bbthunt/bbt2.jpg'
+import bbt3 from './assets/bbthunt/bbt3.jpg'
+import bbt4 from './assets/bbthunt/bbt4.jpg'
+import hunt1 from './assets/bbthunt/hunt1.jpg'
+import hunt2 from './assets/bbthunt/hunt2.jpg'
+import hunt3 from './assets/bbthunt/hunt3.jpg'
+import hunt4 from './assets/bbthunt/hunt4.jpg'
 import './App.css'
 
+const categoryColors = {
+  'metro': '#e74c3c',
+  'nat. parks': '#27ae60',
+  'retail shops': '#f39c12',
+  'f&b': '#8e44ad',
+  'museums': '#2980b9',
+  'tourist centres': '#e67e22',
+}
+
 const stampData = [
-  { location: 'Airport T1', date: '17 Feb 2026', time: '7:51 AM' },
-  { location: 'Taipei Main Station', date: '17 Feb 2026', time: '8:38 AM' },
-  { location: 'Taipei Main Station', date: '17 Feb 2026', time: '8:56 AM' },
-  { location: 'Gongguan Station', date: '17 Feb 2026', time: '9:39 AM' },
-  { location: 'Ximen Station', date: '17 Feb 2026', time: '12:38 PM' },
-  { location: 'Longshan Temple Station', date: '17 Feb 2026', time: '5:57 PM' },
-  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
-  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
-  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
-  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
-  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
-  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
-  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
-  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
-  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM' },
-  { location: 'Flower Clock', date: '18 Feb 2026', time: '1:07 PM' },
-  { location: 'Jiantan Station', date: '18 Feb 2026', time: '3:47 PM' },
-  { location: 'Dongmen Station', date: '19 Feb 2026', time: '10:37 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM' },
-  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
-  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
-  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
-  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
-  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
-  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
-  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM' },
-  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
-  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
-  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
-  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
-  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
-  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
-  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
-  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
-  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
-  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
-  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM' },
-  { location: 'Songjiang Nanjing Station', date: '19 Feb 2026', time: '3:09 PM' },
-  { location: 'Zhongshan Station', date: '19 Feb 2026', time: '3:27 PM' },
-  { location: 'Keelung Station', date: '20 Feb 2026', time: '10:52 AM' },
-  { location: 'Keelung Station', date: '20 Feb 2026', time: '10:52 AM' },
-  { location: 'Keelung Starbucks', date: '20 Feb 2026', time: '11:27 AM' },
-  { location: 'Keelung Starbucks', date: '20 Feb 2026', time: '11:27 AM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '3:00 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '3:00 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '3:00 PM' },
-  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '3:00 PM' },
-  { location: 'The Red House', date: '21 Feb 2026', time: '11:56 AM' },
-  { location: 'The Red House', date: '21 Feb 2026', time: '11:56 AM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:54 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:57 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:57 PM' },
-  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:57 PM' },
-  { location: 'Beimen Station', date: '21 Feb 2026', time: '3:21 PM' },
-  { location: 'Dadaocheng Tourist Centre', date: '21 Feb 2026', time: '3:45 PM' },
-  { location: 'Dadaocheng Tourist Centre', date: '21 Feb 2026', time: '3:45 PM' },
-  { location: 'Dadaocheng Tourist Centre', date: '21 Feb 2026', time: '3:45 PM' },
+  { location: 'Airport T1', date: '17 Feb 2026', time: '7:51 AM', category: 'metro' },
+  { location: 'Taipei Main Station', date: '17 Feb 2026', time: '8:38 AM', category: 'metro' },
+  { location: 'Taipei Main Station', date: '17 Feb 2026', time: '8:56 AM', category: 'metro' },
+  { location: 'Gongguan Station', date: '17 Feb 2026', time: '9:39 AM', category: 'metro' },
+  { location: 'Ximen Station', date: '17 Feb 2026', time: '12:38 PM', category: 'metro' },
+  { location: 'Longshan Temple Station', date: '17 Feb 2026', time: '5:57 PM', category: 'metro' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM', category: 'nat. parks' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM', category: 'nat. parks' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM', category: 'nat. parks' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM', category: 'nat. parks' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM', category: 'nat. parks' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM', category: 'nat. parks' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM', category: 'nat. parks' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM', category: 'nat. parks' },
+  { location: 'Qingtiangang', date: '18 Feb 2026', time: '10:49 AM', category: 'nat. parks' },
+  { location: 'Flower Clock', date: '18 Feb 2026', time: '1:07 PM', category: 'nat. parks' },
+  { location: 'Jiantan Station', date: '18 Feb 2026', time: '3:47 PM', category: 'metro' },
+  { location: 'Dongmen Station', date: '19 Feb 2026', time: '10:37 AM', category: 'metro' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Lai Hao Da\'an', date: '19 Feb 2026', time: '10:56 AM', category: 'retail shops' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM', category: 'retail shops' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM', category: 'retail shops' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM', category: 'retail shops' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM', category: 'retail shops' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM', category: 'retail shops' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM', category: 'retail shops' },
+  { location: 'Bao Maison Da\'an', date: '19 Feb 2026', time: '11:28 AM', category: 'retail shops' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM', category: 'retail shops' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM', category: 'retail shops' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM', category: 'retail shops' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM', category: 'retail shops' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM', category: 'retail shops' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM', category: 'retail shops' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM', category: 'retail shops' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM', category: 'retail shops' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM', category: 'retail shops' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM', category: 'retail shops' },
+  { location: 'Huashan 1914 Creative Park', date: '19 Feb 2026', time: '12:28 PM', category: 'retail shops' },
+  { location: 'Songjiang Nanjing Station', date: '19 Feb 2026', time: '3:09 PM', category: 'metro' },
+  { location: 'Zhongshan Station', date: '19 Feb 2026', time: '3:27 PM', category: 'metro' },
+  { location: 'Keelung Station', date: '20 Feb 2026', time: '10:52 AM', category: 'metro' },
+  { location: 'Keelung Station', date: '20 Feb 2026', time: '10:52 AM', category: 'metro' },
+  { location: 'Keelung Starbucks', date: '20 Feb 2026', time: '11:27 AM', category: 'f&b' },
+  { location: 'Keelung Starbucks', date: '20 Feb 2026', time: '11:27 AM', category: 'f&b' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '2:59 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '3:00 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '3:00 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '3:00 PM', category: 'nat. parks' },
+  { location: 'Heping Geo Park', date: '20 Feb 2026', time: '3:00 PM', category: 'nat. parks' },
+  { location: 'The Red House', date: '21 Feb 2026', time: '11:56 AM', category: 'museums' },
+  { location: 'The Red House', date: '21 Feb 2026', time: '11:56 AM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:48 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:51 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:54 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:57 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:57 PM', category: 'museums' },
+  { location: 'Postal Museum Beimen', date: '21 Feb 2026', time: '2:57 PM', category: 'museums' },
+  { location: 'Beimen Station', date: '21 Feb 2026', time: '3:21 PM', category: 'metro' },
+  { location: 'Dadaocheng Tourist Centre', date: '21 Feb 2026', time: '3:45 PM', category: 'tourist centres' },
+  { location: 'Dadaocheng Tourist Centre', date: '21 Feb 2026', time: '3:45 PM', category: 'tourist centres' },
+  { location: 'Dadaocheng Tourist Centre', date: '21 Feb 2026', time: '3:45 PM', category: 'tourist centres' },
 ]
 
 const allStamps = [
@@ -373,10 +390,31 @@ function Aeroplane({ headerProgress }) {
   )
 }
 
+const introStamps = [
+  { src: hunt1, baseRotate: -12, left: '0%',  bottom: '30%' },
+  { src: hunt2, baseRotate: -8,  left: '25%', bottom: '20%' },
+  { src: hunt3, baseRotate: -15, left: '50%', bottom: '15%' },
+  { src: hunt4, baseRotate: -18, left: '75%', bottom: '25%' },
+]
+
 function Intro({headerProgress}) {
+  const sectionRef = useRef(null)
+  const [wobble, setWobble] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return
+      const rect = sectionRef.current.getBoundingClientRect()
+      const progress = Math.max(0, Math.min(1, -rect.top / rect.height))
+      setWobble(progress)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <>
-      <section id="Intro">
+      <section id="Intro" ref={sectionRef} style={{ position: 'relative' }}>
         <div class="Stat-container">
           <h3>i love collecting stamps. <br></br>so when my family planned for a trip to taipei, taiwan... <br></br> i *had* to go on a stamp hunt <br></br> <span className="word2">(and obsessively tracked them all)</span></h3>
           <p2>
@@ -386,6 +424,23 @@ function Intro({headerProgress}) {
           style={{ width: '250px', position: 'relative', left: '-400px', top: '-370px', transform: 'rotate(-20deg)', opacity: 0, opacity: headerProgress +0.2,
         transition: 'opacity 0.2s ease-in',}}/>
         </div>
+        {introStamps.map((stamp, i) => {
+          const wobbleAngle = Math.sin(wobble * Math.PI * 6 + i * 0.8) * 10
+          const rotate = stamp.baseRotate + wobbleAngle
+          return (
+            <img
+              key={i}
+              src={stamp.src}
+              className="intro-stamp"
+              style={{
+                left: stamp.left,
+                bottom: stamp.bottom,
+                transform: `rotate(${rotate}deg)`,
+              }}
+              alt=""
+            />
+          )
+        })}
       </section>
     </>
   )
@@ -448,7 +503,7 @@ function Intro2() {
     <>
       <section id="Intro">
         <div class="Stat-container" ref={sectionRef1}>
-          <h3>and some very <span style={{ color: 'blue', fontWeight: 'bold' }}>sweet</span>, <br></br>
+          <h3><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>and some very <span style={{ color: 'blue', fontWeight: 'bold' }}>sweet</span>, <br></br>
           very <span style={{ color: 'blue', fontWeight: 'bold' }}>calorie-heavy</span>, <br></br>
           <span style={{ color: 'brown', fontWeight: 'bold' }}>beige</span> drink <br></br>
           with black round pearls<br></br> 
@@ -458,6 +513,18 @@ function Intro2() {
           </p2>
           <img src={stamp29}
           style={{ width: '250px', position: 'relative', left: '400px', top: '-230px', transform: 'rotate(20deg)', opacity: introScrollProgress,
+        transition: 'opacity 0.2s ease-in'}}/>
+        <img src={bbt1}
+          style={{ width: '150px', position: 'relative', left: '-300px', top: '-600px', transform: 'rotate(-20deg)', opacity: introScrollProgress,
+        transition: 'opacity 0.2s ease-in'}}/>
+        <img src={bbt2}
+          style={{ width: '150px', position: 'relative', left: '-500px', top: '-700px', transform: 'rotate(10deg)', opacity: introScrollProgress,
+        transition: 'opacity 0.2s ease-in'}}/>
+        <img src={bbt3}
+          style={{ width: '150px', position: 'relative', left: '-300px', top: '-750px', transform: 'rotate(-10deg)', opacity: introScrollProgress,
+        transition: 'opacity 0.2s ease-in'}}/>
+        <img src={bbt4}
+          style={{ width: '150px', position: 'relative', left: '-500px', top: '-850px', transform: 'rotate(-10deg)', opacity: introScrollProgress,
         transition: 'opacity 0.2s ease-in'}}/>
         </div>
       </section>
@@ -488,15 +555,21 @@ function StampCatalogue() {
         {allStamps.map((src, i) => {
           const num = String(i + 1).padStart(2, '0')
           const info = stampData[i]
+          const catColor = info ? categoryColors[info.category] : undefined
           return (
-            <div key={i} className="catalogue-item">
+            <div
+              key={i}
+              className="catalogue-item"
+              style={catColor ? { '--cat-color': catColor } : undefined}
+            >
               <img src={src} alt={`Stamp ${num}`} />
               <span className="catalogue-number">{num}</span>
               {info && (
                 <div className="catalogue-tooltip">
-                  <span>location: {info.location}</span>
-                  <span>date: {info.date}</span>
-                  <span>time: {info.time}</span>
+                  <span>📍 location: {info.location}</span>
+                  <span>📅 date: {info.date}</span>
+                  <span>🕰️ time: {info.time}</span>
+                  <span>🏷️ category: {info.category}</span>
                 </div>
               )}
             </div>

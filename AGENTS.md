@@ -399,14 +399,15 @@ The following quirks were discovered during development and differ from the offi
 ### Completed
 
 - **Title section with 7 flying stickers**: Stamps (06, 19, 17, 46, 73, 78, 51) arranged around the title "stamping across taipei in 5 days". Each sticker flies to its nearest edge (top/left/right, never bottom) on scroll, maintaining its original rotation. Responsive sizing: 100px mobile → 140/160px tablet → 180/220px laptop.
-- **Aeroplane animation**: A ✈ icon starts below "skip to stamp catalogue" text and flies along a quadratic bezier curve toward the bottom-right edge as the user scrolls to the Intro section. Leaves a dotted trail behind it. Trail path avoids all centered text.
+- **Aeroplane animation**: A ✈ icon starts dynamically positioned below "skip to stamp catalogue" text (maintains consistent gap across screen sizes) and flies along a cubic bezier curve toward the bottom-right edge as the user scrolls. Leaves a dotted trail behind it (SVG overflow visible). Trail path avoids all centered text.
 - **Intro section**: Stamp collecting narrative with styled text and date range.
+- **"Skip to stamp catalogue" link**: Clicking smoothly scrolls to the stamp catalogue section.
+- **Stamp catalogue section**: All 91 stamps displayed in a responsive grid (2 cols mobile → 3 → 4 → 5 cols laptop) with thin grey borders, centered stamp numbers (01–91), and hover tooltips showing location/date/time from `stamping-data-bank.csv`. Grid border turns black on hover.
 - **Dev server port**: Vite configured to always use `localhost:3000`.
 
 ### In Progress
 
 - Stat1 section (placeholder content)
-- Stamp catalogue section (referenced in "skip to stamp catalogue" link)
 
 ---
 

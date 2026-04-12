@@ -160,9 +160,10 @@ p1 {
   padding: 10px 10px;
 
   &:hover {
-    /* text-decoration: underline; */
-    background: var(--accent-bg);
+    text-decoration: underline;
+    background: lightgrey;
     border-radius: 5px;
+    color:#000;
 
   }
 }
@@ -205,6 +206,25 @@ word2:hover {
   background-color:aqua;
 }
 
+/* Intro stamps */
+
+.intro-stamp {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  pointer-events: none;
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .intro-stamp { width: 130px; height: 130px; }
+}
+
+@media (min-width: 1280px) {
+  .intro-stamp { width: 160px; height: 160px; }
+}
+
 /* Stamp Catalogue */
 
 .catalogue-section {
@@ -233,6 +253,16 @@ word2:hover {
   padding: 12px;
   border: 1px solid #ccc;
   position: relative;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.catalogue-item::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 2px solid var(--cat-color, transparent);
+  pointer-events: none;
+  transition: border-color 0.2s;
 }
 
 .catalogue-item img {
@@ -248,7 +278,7 @@ word2:hover {
   color: #666;
   margin-top: 6px;
   text-align: center;
-}
+  }
 
 .catalogue-tooltip {
   display: none;
@@ -256,29 +286,32 @@ word2:hover {
   bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
-  background: #333;
-  color: #fff;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #222;
   padding: 10px 14px;
-  border-radius: 6px;
+  border-radius: 12px;
   font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   z-index: 100;
   pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .catalogue-tooltip span {
   display: block;
 }
 
-.catalogue-tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: #333;
+.catalogue-item:hover {
+  border-color: var(--cat-color, #000);
+  background-color: var(--cat-color, transparent);
+}
+
+.catalogue-item:hover::before {
+  border-color: transparent;
 }
 
 .catalogue-item:hover .catalogue-tooltip {
