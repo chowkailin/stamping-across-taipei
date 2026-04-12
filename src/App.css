@@ -6,7 +6,7 @@ html {
 body {
   background-color: #fafaf8;
   background-image: url('./assets/textured-paper.png');
-  background-size: 1500px 800px;
+  background-size: cover;
   background-attachment: fixed;
   margin: 0;
   padding: 0;
