@@ -311,7 +311,13 @@ word2:hover {
 }
 
 .catalogue-item:hover::before {
-  border-color: transparent;
+  border-color: #000;
+  border-width: 1px;
+}
+
+.catalogue-item:hover .catalogue-number {
+  color: #000;
+  font-weight: 700;
 }
 
 .catalogue-item:hover .catalogue-tooltip {

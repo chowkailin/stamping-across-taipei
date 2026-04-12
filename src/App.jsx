@@ -102,12 +102,12 @@ import hunt4 from './assets/bbthunt/hunt4.jpg'
 import './App.css'
 
 const categoryColors = {
-  'metro': '#e74c3c',
-  'nat. parks': '#27ae60',
-  'retail shops': '#f39c12',
-  'f&b': '#8e44ad',
-  'museums': '#2980b9',
-  'tourist centres': '#e67e22',
+  'metro': '#e89975', /* 179 ​Danish Delicious */
+  'nat. parks': '#82c394', /* 168 ​Wonder Walks */
+  'retail shops': '#58afcf', /* 173 ​Water Wakeup */
+  'f&b': '#d9eb75', /* 166 ​Daylight Song */
+  'museums': '#ffc454', /* 163 ​Sunshine Kick */
+  'tourist centres': '#c5a491', /* 178 ​Sweet Tea */
 }
 
 const stampData = [
@@ -239,6 +239,7 @@ export function App() {
       <Intro headerProgress={headerScrollProgress} />
       <Intro2 onScroll={setIntroScrollProgress} />
       <Stat1 introProgress={introScrollProgress} />
+      <Stat2 />
       <StampCatalogue />
     </div>
   )
@@ -503,28 +504,31 @@ function Intro2() {
     <>
       <section id="Intro">
         <div class="Stat-container" ref={sectionRef1}>
-          <h3><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>and some very <span style={{ color: 'blue', fontWeight: 'bold' }}>sweet</span>, <br></br>
-          very <span style={{ color: 'blue', fontWeight: 'bold' }}>calorie-heavy</span>, <br></br>
-          <span style={{ color: 'brown', fontWeight: 'bold' }}>beige</span> drink <br></br>
+          <h3><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>and have <br></br>some very <span style={{ color: '#58afcf', fontWeight: 'bold' }}>sweet</span>, <br></br>
+          very <span style={{ color: '#82c394', fontWeight: 'bold' }}>calorie-heavy</span>, <br></br>
+          <span style={{ color: '#ffd4a2', fontWeight: 'bold' }}>beige</span> drink <br></br>
           with black round pearls<br></br> 
-          or sometimes <span style={{ color: 'yellow', fontWeight: 'bold' }}>gold</span></h3>
+          or sometimes <span style={{ color: '#ffc454', fontWeight: 'bold' }}>gold</span></h3>
+      
+      {/* sweet: 173 ​Water Wakeup; calorie: 168 ​Wonder Walks; beige: 164 ​Creamed Butter; gold: 163 ​Sunshine Kick  */}
+
           <p2>
-            { 'how can we not in the land of bubble tea' }
+            how can we not in the land of bubble tea //<br></br> i was wondering why i cannot see <br></br>my beige x black pearls combo anymore, and<br></br> turns out plastic cups was banned in 2022 in taipei, <br></br>and throughout taiwan by end of 2024
           </p2>
           <img src={stamp29}
-          style={{ width: '250px', position: 'relative', left: '400px', top: '-230px', transform: 'rotate(20deg)', opacity: introScrollProgress,
+          style={{ width: '250px', position: 'relative', left: '400px', top: '-300px', transform: 'rotate(20deg)', opacity: introScrollProgress,
         transition: 'opacity 0.2s ease-in'}}/>
         <img src={bbt1}
-          style={{ width: '150px', position: 'relative', left: '-300px', top: '-600px', transform: 'rotate(-20deg)', opacity: introScrollProgress,
+          style={{ width: '150px', position: 'relative', left: '-300px', top: '-700px', transform: 'rotate(-20deg)', opacity: introScrollProgress,
         transition: 'opacity 0.2s ease-in'}}/>
         <img src={bbt2}
-          style={{ width: '150px', position: 'relative', left: '-500px', top: '-700px', transform: 'rotate(10deg)', opacity: introScrollProgress,
+          style={{ width: '150px', position: 'relative', left: '-500px', top: '-750px', transform: 'rotate(10deg)', opacity: introScrollProgress,
         transition: 'opacity 0.2s ease-in'}}/>
         <img src={bbt3}
-          style={{ width: '150px', position: 'relative', left: '-300px', top: '-750px', transform: 'rotate(-10deg)', opacity: introScrollProgress,
+          style={{ width: '150px', position: 'relative', left: '-300px', top: '-800px', transform: 'rotate(-10deg)', opacity: introScrollProgress,
         transition: 'opacity 0.2s ease-in'}}/>
         <img src={bbt4}
-          style={{ width: '150px', position: 'relative', left: '-500px', top: '-850px', transform: 'rotate(-10deg)', opacity: introScrollProgress,
+          style={{ width: '150px', position: 'relative', left: '-500px', top: '-900px', transform: 'rotate(-10deg)', opacity: introScrollProgress,
         transition: 'opacity 0.2s ease-in'}}/>
         </div>
       </section>
@@ -537,7 +541,22 @@ function Stat1() {
     <>
       <section id="Stat1">
         <div class="Stat-container">
-          <h2>another stat here<span className="word1">styled</span>thing</h2>
+          <h2>five days here yielded <span className="word1">91</span>stamps in total</h2>
+          <p2>
+            { 'and that is 18.2 stamps per day!' }
+          </p2>
+        </div>
+      </section>
+    </>
+  )
+}
+
+function Stat2() {
+  return (
+    <>
+      <section id="Stat1">
+        <div class="Stat-container">
+          <h2>and out of that 91 stamps,<span className="word1">32</span>were from retail shops</h2>
           <p2>
             { 'maybe include the dates of this project' }
           </p2>
