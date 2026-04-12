@@ -240,6 +240,9 @@ export function App() {
       <Intro2 onScroll={setIntroScrollProgress} />
       <Stat1 introProgress={introScrollProgress} />
       <Stat2 />
+      <Stat3 />
+      <Stat4 />
+      <Stat5 />
       <StampCatalogue />
     </div>
   )
@@ -393,9 +396,9 @@ function Aeroplane({ headerProgress }) {
 
 const introStamps = [
   { src: hunt1, baseRotate: -12, left: '0%',  bottom: '30%' },
-  { src: hunt2, baseRotate: -8,  left: '25%', bottom: '20%' },
-  { src: hunt3, baseRotate: -15, left: '50%', bottom: '15%' },
-  { src: hunt4, baseRotate: -18, left: '75%', bottom: '25%' },
+  { src: hunt2, baseRotate: -8,  left: '25%', bottom: '15%' },
+  { src: hunt3, baseRotate: -15, left: '50%', bottom: '10%' },
+  { src: hunt4, baseRotate: -18, left: '75%', bottom: '20%' },
 ]
 
 function Intro({headerProgress}) {
@@ -429,17 +432,17 @@ function Intro({headerProgress}) {
           const wobbleAngle = Math.sin(wobble * Math.PI * 6 + i * 0.8) * 10
           const rotate = stamp.baseRotate + wobbleAngle
           return (
-            <img
+            <div
               key={i}
-              src={stamp.src}
-              className="intro-stamp"
+              className="intro-stamp polaroid"
               style={{
                 left: stamp.left,
                 bottom: stamp.bottom,
                 transform: `rotate(${rotate}deg)`,
               }}
-              alt=""
-            />
+            >
+              <img src={stamp.src} alt="" />
+            </div>
           )
         })}
       </section>
@@ -551,14 +554,195 @@ function Stat1() {
   )
 }
 
+const dayBreakdown = [
+  { day: 1, date: '17 Feb', count: 6, legend: '' },
+  { day: 2, date: '18 Feb', count: 11, legend: '' },
+  { day: 3, date: '19 Feb', count: 35, legend: '' },
+  { day: 4, date: '20 Feb', count: 19, legend: '' },
+  { day: 5, date: '21 Feb', count: 20, legend: '' },
+]
+
+const dayColors = ['#6ec6e6', '#f7b267', '#e74c3c', '#27ae60', '#8e44ad']
+
 function Stat2() {
+  const total = 91
+  const maxCount = Math.max(...dayBreakdown.map(d => d.count))
+  const cx = 200
+  const cy = 200
+  const r = 180
+  const explodeOffset = 16
+
+  const slices = []
+  let cumAngle = -90
+
+  dayBreakdown.forEach(({ day, date, count }, i) => {
+    const pct = count / total
+    const angle = pct * 360
+    const startAngle = cumAngle
+    const endAngle = cumAngle + angle
+    const midAngle = ((startAngle + endAngle) / 2) * (Math.PI / 180)
+
+    const isMax = count === maxCount
+    const offsetX = isMax ? Math.cos(midAngle) * explodeOffset : 0
+    const offsetY = isMax ? Math.sin(midAngle) * explodeOffset : 0
+
+    const startRad = (startAngle * Math.PI) / 180
+    const endRad = (endAngle * Math.PI) / 180
+    const largeArc = angle > 180 ? 1 : 0
+
+    const x1 = cx + offsetX + r * Math.cos(startRad)
+    const y1 = cy + offsetY + r * Math.sin(startRad)
+    const x2 = cx + offsetX + r * Math.cos(endRad)
+    const y2 = cy + offsetY + r * Math.sin(endRad)
+
+    const d = [
+      `M ${cx + offsetX} ${cy + offsetY}`,
+      `L ${x1} ${y1}`,
+      `A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2}`,
+      'Z',
+    ].join(' ')
+
+    const labelR = r * 0.62
+    const labelX = cx + offsetX + labelR * Math.cos(midAngle)
+    const labelY = cy + offsetY + labelR * Math.sin(midAngle)
+
+    slices.push(
+      <g key={i}>
+        <path d={d} fill={dayColors[i]} stroke="#fafaf8" strokeWidth="2" />
+        <text x={labelX} y={labelY} textAnchor="middle" dominantBaseline="central" className="pie-label" style={day === 1 ? { fontSize: '11px' } : undefined}>
+          {day === 1 ? (
+            <>
+              <tspan x={labelX} dy="-1.2em">day {day}</tspan>
+              <tspan x={labelX} dy="1.2em">{count}</tspan>
+              <tspan x={labelX} dy="1.2em">({(pct * 100).toFixed(1)}%)</tspan>
+            </>
+          ) : (
+            <>
+              <tspan x={labelX} dy="-0.6em">day {day}</tspan>
+              <tspan x={labelX} dy="1.2em">{count} ({(pct * 100).toFixed(1)}%)</tspan>
+            </>
+          )}
+        </text>
+      </g>
+    )
+
+    cumAngle = endAngle
+  })
+
   return (
     <>
       <section id="Stat1">
         <div class="Stat-container">
-          <h2>and out of that 91 stamps,<span className="word1">32</span>were from retail shops</h2>
+          <h2>day three was my busiest day ever!</h2>
           <p2>
-            { 'maybe include the dates of this project' }
+            it was a shopping day <br></br>(and where all my retail shop stamps were collected)
+          </p2>
+          <div className="pie-container">
+            <svg viewBox="0 0 400 400" className="pie-chart">
+              {slices}
+            </svg>
+            <div className="pie-legend">
+              {dayBreakdown.map(({ day, date, legend }, i) => (
+                <div key={i} className="pie-legend-item">
+                  <span className="pie-legend-swatch" style={{ backgroundColor: dayColors[i] }} />
+                  <span className="pie-legend-text">
+                    <strong>day {day} — {date}</strong>
+                    {legend && <span>{legend}</span>}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
+
+const categoryBreakdown = [
+  { category: 'retail shops', count: 32 },
+  { category: 'nat. parks', count: 25 },
+  { category: 'museums', count: 16 },
+  { category: 'metro', count: 13 },
+  { category: 'tourist centres', count: 3 },
+  { category: 'f&b', count: 2 },
+]
+
+function Stat3() {
+  const maxCount = categoryBreakdown[0].count
+  const chartRef = useRef(null)
+  const [filled, setFilled] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setFilled(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    if (chartRef.current) observer.observe(chartRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <>
+      <section id="Stat1">
+        <div class="Stat-container">
+          <h2>and out of that 91 stamps,<span className="word1">32</span>were from retail shops.</h2>
+          <div className="bar-chart" ref={chartRef}>
+            {categoryBreakdown.map(({ category, count }, i) => {
+              const pct = ((count / 91) * 100).toFixed(1)
+              const widthPct = (count / maxCount) * 100
+              return (
+                <div key={category} className="bar-row">
+                  <span className="bar-label">{category}</span>
+                  <div className="bar-track">
+                    <div
+                      className="bar-fill"
+                      style={{
+                        width: filled ? `${widthPct}%` : '0%',
+                        backgroundColor: categoryColors[category],
+                        transitionDelay: `${i * 0.5}s`,
+                      }}
+                    />
+                    <span className="bar-value" style={{ opacity: filled ? 1 : 0, transitionDelay: `${i * 0.5 + 0.4}s` }}>{count} ({pct}%)</span>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
+
+function Stat4() {
+  return (
+    <>
+      <section id="Stat1">
+        <div class="Stat-container">
+          <h2>the metro stamp category is still my favourite though. (in small)<br></br><span className="word1">15!</span>visited a total of 12 stations across taipei!</h2>
+          <p2>
+            list of metro stations appears as user scrolls down
+          </p2>
+        </div>
+      </section>
+    </>
+  )
+}
+
+function Stat5() {
+  return (
+    <>
+      <section id="Stat1">
+        <div class="Stat-container">
+          <h2>Heping GeoPark in Keelung was the place with the most stamps. <br></br><span className="word1">15!</span></h2>
+          <p2>
+            but both Postage Museum and Lai Hao in Da'an was a close second at 14 
           </p2>
         </div>
       </section>

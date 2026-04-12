@@ -210,19 +210,140 @@ word2:hover {
 
 .intro-stamp {
   position: absolute;
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
   pointer-events: none;
   will-change: transform;
 }
 
+.polaroid {
+  background: #fff;
+  padding: 6px 6px 20px;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.18);
+  width: 100px;
+}
+
+.polaroid img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
 @media (min-width: 768px) {
-  .intro-stamp { width: 130px; height: 130px; }
+  .polaroid { width: 130px; padding: 7px 7px 24px; }
 }
 
 @media (min-width: 1280px) {
-  .intro-stamp { width: 160px; height: 160px; }
+  .polaroid { width: 160px; padding: 8px 8px 28px; }
+}
+
+/* Pie Chart */
+
+.pie-container {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.pie-chart {
+  width: 400px;
+  height: 400px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.pie-label {
+  font-size: 13px;
+  font-weight: 600;
+  fill: #fff;
+}
+
+.pie-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pie-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #444;
+}
+
+.pie-legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 3px;
+}
+
+.pie-legend-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pie-legend-text span {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Bar Chart */
+
+.bar-chart {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bar-label {
+  width: 120px;
+  text-align: right;
+  font-size: 14px;
+  color: #555;
+  flex-shrink: 0;
+}
+
+.bar-track {
+  flex: 1;
+  height: 32px;
+  background: #eee;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.bar-value {
+  position: relative;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+  padding-left: 8px;
+  transition: opacity 0.3s ease;
 }
 
 /* Stamp Catalogue */
