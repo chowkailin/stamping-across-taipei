@@ -268,7 +268,7 @@ function Header({ onScroll }) {
     <section id="title" className="header-container" ref={sectionRef}>
       <div className="title-container">
         <h1>stamping across taipei <br /> in 5 days</h1>
-        <p1 onClick={() => document.getElementById('stamp-catalogue').scrollIntoView({ behavior: 'smooth' })} style={{ cursor: 'pointer' }}>{'> skip to stamp catalogue'}</p1>
+        <p className="subtitle" onClick={() => document.getElementById('stamp-catalogue').scrollIntoView({ behavior: 'smooth' })} style={{ cursor: 'pointer' }}>{'> skip to stamp catalogue'}</p>
       </div>
 
       <div className="sticker-container">
@@ -311,7 +311,7 @@ function Aeroplane({ headerProgress }) {
 
   useEffect(() => {
     const update = () => {
-      const textEl = document.querySelector('.title-container p1')
+      const textEl = document.querySelector('.title-container .subtitle')
       if (!textEl) return
       const rect = textEl.getBoundingClientRect()
       const layerHeight = window.innerHeight * 2 // 200vh
@@ -418,15 +418,14 @@ function Intro({headerProgress}) {
 
   return (
     <>
-      <section id="Intro" ref={sectionRef} style={{ position: 'relative' }}>
-        <div class="Stat-container">
+      <section id="Intro" className="intro-section" ref={sectionRef} style={{ position: 'relative' }}>
+        <div className="Stat-container">
           <h3>i love collecting stamps. <br></br>so when my family planned for a trip to taipei, taiwan... <br></br> i *had* to go on a stamp hunt <br></br> <span className="word2">(and obsessively tracked them all)</span></h3>
-          <p2>
+          <p className="description">
             { 'basically 5 days of me dragging my family around for some inked images' }<br></br> {'17 - 21 february 2026' }
-          </p2>
-          <img src={taipeiword} 
-          style={{ width: '250px', position: 'relative', left: '-400px', top: '-370px', transform: 'rotate(-20deg)', opacity: 0, opacity: headerProgress +0.2,
-        transition: 'opacity 0.2s ease-in',}}/>
+          </p>
+          <img src={taipeiword} className="deco deco-taipei" alt=""
+          style={{ opacity: headerProgress + 0.2, transition: 'opacity 0.2s ease-in' }}/>
         </div>
         {introStamps.map((stamp, i) => {
           const wobbleAngle = Math.sin(wobble * Math.PI * 6 + i * 0.8) * 10
@@ -436,8 +435,8 @@ function Intro({headerProgress}) {
               key={i}
               className="intro-stamp polaroid"
               style={{
-                left: stamp.left,
-                bottom: stamp.bottom,
+                '--left': stamp.left,
+                '--bottom': stamp.bottom,
                 transform: `rotate(${rotate}deg)`,
               }}
             >
@@ -478,7 +477,6 @@ function Intro2() {
 
   useEffect(() => {
     if (isInView) {
-      console.log("attaching...")
 
       const handleScroll = () => {
         if (!sectionRef1.current ) return
@@ -494,19 +492,17 @@ function Intro2() {
       window.addEventListener('scroll', handleScroll, { passive: true })
 
       return () => {
-        console.log("detaching...")
 
         window.removeEventListener('scroll', handleScroll)
       } 
     }
   }, [isInView])
 
-  console.log("introScrollProgress: ", introScrollProgress);
 
   return (
     <>
       <section id="Intro">
-        <div class="Stat-container" ref={sectionRef1}>
+        <div className="Stat-container" ref={sectionRef1}>
           <h3><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>and have <br></br>some very <span style={{ color: '#58afcf', fontWeight: 'bold' }}>sweet</span>, <br></br>
           very <span style={{ color: '#82c394', fontWeight: 'bold' }}>calorie-heavy</span>, <br></br>
           <span style={{ color: '#ffd4a2', fontWeight: 'bold' }}>beige</span> drink <br></br>
@@ -515,24 +511,19 @@ function Intro2() {
       
       {/* sweet: 173 ​Water Wakeup; calorie: 168 ​Wonder Walks; beige: 164 ​Creamed Butter; gold: 163 ​Sunshine Kick  */}
 
-          <p2>
+          <p className="description">
             how can we not in the land of bubble tea //<br></br> i was wondering why i cannot see <br></br>my beige x black pearls combo anymore, and<br></br> turns out plastic cups was banned in 2022 in taipei, <br></br>and throughout taiwan by end of 2024
-          </p2>
-          <img src={stamp29}
-          style={{ width: '250px', position: 'relative', left: '400px', top: '-300px', transform: 'rotate(20deg)', opacity: introScrollProgress,
-        transition: 'opacity 0.2s ease-in'}}/>
-        <img src={bbt1}
-          style={{ width: '150px', position: 'relative', left: '-300px', top: '-700px', transform: 'rotate(-20deg)', opacity: introScrollProgress,
-        transition: 'opacity 0.2s ease-in'}}/>
-        <img src={bbt2}
-          style={{ width: '150px', position: 'relative', left: '-500px', top: '-750px', transform: 'rotate(10deg)', opacity: introScrollProgress,
-        transition: 'opacity 0.2s ease-in'}}/>
-        <img src={bbt3}
-          style={{ width: '150px', position: 'relative', left: '-300px', top: '-800px', transform: 'rotate(-10deg)', opacity: introScrollProgress,
-        transition: 'opacity 0.2s ease-in'}}/>
-        <img src={bbt4}
-          style={{ width: '150px', position: 'relative', left: '-500px', top: '-900px', transform: 'rotate(-10deg)', opacity: introScrollProgress,
-        transition: 'opacity 0.2s ease-in'}}/>
+          </p>
+          <img src={stamp29} className="deco deco-bbt-stamp" alt=""
+          style={{ opacity: introScrollProgress, transition: 'opacity 0.2s ease-in' }}/>
+        <img src={bbt1} className="deco deco-bbt-1" alt=""
+          style={{ opacity: introScrollProgress, transition: 'opacity 0.2s ease-in' }}/>
+        <img src={bbt2} className="deco deco-bbt-2" alt=""
+          style={{ opacity: introScrollProgress, transition: 'opacity 0.2s ease-in' }}/>
+        <img src={bbt3} className="deco deco-bbt-3" alt=""
+          style={{ opacity: introScrollProgress, transition: 'opacity 0.2s ease-in' }}/>
+        <img src={bbt4} className="deco deco-bbt-4" alt=""
+          style={{ opacity: introScrollProgress, transition: 'opacity 0.2s ease-in' }}/>
         </div>
       </section>
     </>
@@ -543,11 +534,11 @@ function Stat1() {
   return (
     <>
       <section id="Stat1">
-        <div class="Stat-container">
+        <div className="Stat-container">
           <h2>five days here yielded <span className="word1">91</span>stamps in total</h2>
-          <p2>
+          <p className="description">
             { 'and that is 18.2 stamps per day!' }
-          </p2>
+          </p>
         </div>
       </section>
     </>
@@ -632,11 +623,11 @@ function Stat2() {
   return (
     <>
       <section id="Stat1">
-        <div class="Stat-container">
+        <div className="Stat-container">
           <h2>day three was my busiest day ever!</h2>
-          <p2>
+          <p className="description">
             it was a shopping day <br></br>(and where all my retail shop stamps were collected)
-          </p2>
+          </p>
           <div className="pie-container">
             <svg viewBox="0 0 400 400" className="pie-chart">
               {slices}
@@ -690,7 +681,7 @@ function Stat3() {
   return (
     <>
       <section id="Stat1">
-        <div class="Stat-container">
+        <div className="Stat-container">
           <h2>and out of that 91 stamps,<span className="word1">32</span>were from retail shops.</h2>
           <div className="bar-chart" ref={chartRef}>
             {categoryBreakdown.map(({ category, count }, i) => {
@@ -724,11 +715,11 @@ function Stat4() {
   return (
     <>
       <section id="Stat1">
-        <div class="Stat-container">
+        <div className="Stat-container">
           <h2>the metro stamp category is still my favourite though. (in small)<br></br><span className="word1">15!</span>visited a total of 12 stations across taipei!</h2>
-          <p2>
+          <p className="description">
             list of metro stations appears as user scrolls down
-          </p2>
+          </p>
         </div>
       </section>
     </>
@@ -739,11 +730,11 @@ function Stat5() {
   return (
     <>
       <section id="Stat1">
-        <div class="Stat-container">
+        <div className="Stat-container">
           <h2>Heping GeoPark in Keelung was the place with the most stamps. <br></br><span className="word1">15!</span></h2>
-          <p2>
+          <p className="description">
             but both Postage Museum and Lai Hao in Da'an was a close second at 14 
-          </p2>
+          </p>
         </div>
       </section>
     </>

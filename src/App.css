@@ -1,6 +1,7 @@
 html {
   margin: 0;
   padding: 0;
+  overflow-x: clip;
 }
 
 body {
@@ -12,6 +13,7 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 .title-container {
@@ -118,21 +120,21 @@ body {
   }
 
 h1 {
-  font-size: 100px;
+  font-size: clamp(2.75rem, 10vw, 100px);
   line-height: 1;
   margin-bottom: 10px;
 
 }
 
 h2 {
-  font-size: 80px;
+  font-size: clamp(2rem, 8vw, 80px);
   line-height: 1;
   border-radius: 5px;
   margin-bottom: 24px;
 }
 
 h3 {
-  font-size: 30px;
+  font-size: clamp(1.25rem, 3vw, 30px);
   line-height: 1.2;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -155,7 +157,9 @@ h4 {
   margin-bottom: 24px;
 }
 
-p1 {
+.subtitle {
+  display: inline;
+  margin: 0;
   color: grey;
   padding: 10px 10px;
 
@@ -168,7 +172,9 @@ p1 {
   }
 }
 
-p2 {
+.description {
+  display: inline;
+  margin: 0;
   color: grey;
   padding: 10px 10px;
   }
@@ -190,7 +196,7 @@ p2 {
   font-style: italic;
   color: lightblue;
   font-weight: 400;
-  font-size: 25px;
+  font-size: clamp(1rem, 2.5vw, 25px);
   padding: 0px;
   margin: 0px;
   background-color: lightblue;
@@ -210,6 +216,8 @@ word2:hover {
 
 .intro-stamp {
   position: absolute;
+  left: var(--left);
+  bottom: var(--bottom);
   pointer-events: none;
   will-change: transform;
 }
@@ -236,6 +244,16 @@ word2:hover {
   .polaroid { width: 160px; padding: 8px 8px 28px; }
 }
 
+/* Decorative images: desktop positions (offsets from where each image sits in the flow) */
+
+.deco { position: relative; }
+.deco-taipei    { width: 250px; left: -400px; top: -370px; transform: rotate(-20deg); }
+.deco-bbt-stamp { width: 250px; left: 400px;  top: -300px; transform: rotate(20deg); }
+.deco-bbt-1     { width: 150px; left: -300px; top: -700px; transform: rotate(-20deg); }
+.deco-bbt-2     { width: 150px; left: -500px; top: -750px; transform: rotate(10deg); }
+.deco-bbt-3     { width: 150px; left: -300px; top: -800px; transform: rotate(-10deg); }
+.deco-bbt-4     { width: 150px; left: -500px; top: -900px; transform: rotate(-10deg); }
+
 /* Pie Chart */
 
 .pie-container {
@@ -246,8 +264,9 @@ word2:hover {
 }
 
 .pie-chart {
-  width: 400px;
-  height: 400px;
+  width: min(400px, 100%);
+  height: auto;
+  aspect-ratio: 1;
   overflow: visible;
   flex-shrink: 0;
 }
@@ -457,3 +476,50 @@ word2:hover {
   .catalogue-grid { grid-template-columns: repeat(5, 1fr); gap: 20px; }
 }
 
+/* Below the 1126px desktop layout: let sections grow with their content, keep everything inside the screen */
+
+@media (max-width: 1125px) {
+  .title-container {
+    left: 0;
+    right: 0;
+    padding: 0 16px;
+  }
+
+  .Stat-container {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+    padding: 64px 16px;
+    box-sizing: border-box;
+  }
+
+  .pie-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Polaroids drop to the bottom of the section, and the text makes room above them */
+  .intro-section .Stat-container { padding-bottom: 240px; }
+  .intro-stamp { bottom: calc(var(--bottom) * 0.25 + 16px); }
+
+  .bar-label {
+    width: 90px;
+    font-size: 13px;
+  }
+
+  .catalogue-tooltip {
+    white-space: normal;
+    width: max-content;
+    max-width: 60vw;
+  }
+
+  /* Decorations move out of the text flow and into the empty space around it */
+  .deco { position: absolute; }
+  .deco-taipei    { width: clamp(110px, 24vw, 200px); left: 4%;  top: 6%;    transform: rotate(-20deg); }
+  .deco-bbt-1     { width: clamp(80px, 20vw, 140px);  left: 6%;  top: 40px;  }
+  .deco-bbt-2     { width: clamp(80px, 20vw, 140px);  left: auto; right: 8%; top: 140px; }
+  .deco-bbt-3     { width: clamp(80px, 20vw, 140px);  left: 16%; top: 280px; }
+  .deco-bbt-4     { width: clamp(80px, 20vw, 140px);  left: auto; right: 18%; top: 390px; }
+  .deco-bbt-stamp { width: clamp(120px, 32vw, 220px); left: auto; right: 8%; top: auto; bottom: 24px; }
+  .Stat-container:has(> .deco-bbt-stamp) { padding-bottom: calc(clamp(120px, 32vw, 220px) + 48px); }
+}
